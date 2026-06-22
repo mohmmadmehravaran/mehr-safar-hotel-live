@@ -79,7 +79,7 @@ export default function Home() {
                 style={{ border: `1px solid ${theme.colors.cardBorder}` }}
               >
                 {/* Section tab (hotel) */}
-                <div className="flex justify-end mb-4">
+                <div className="flex justify-start mb-4">
                   <span
                     className="inline-flex items-center gap-1.5 pb-2 font-bold text-sm border-b-2"
                     style={{ color: theme.colors.primary, borderColor: theme.colors.primary }}
