@@ -63,24 +63,24 @@ export default function Home() {
 
       {/* ── HERO ── */}
       <section className="relative" style={{ backgroundColor: theme.colors.bodyBg, isolation: 'isolate' }}>
-        {/* Full-bleed hero banner — same proportions as iranhotel.co (full width, 650px tall on desktop) */}
-        <div className="relative w-full h-[460px] sm:h-[560px] lg:h-[650px]">
-          <img
-            src={heroBg}
-            alt=""
-            style={{ width: '100%', height: '100%' }}
-            className="absolute inset-0 object-cover select-none pointer-events-none"
-          />
+        <div className="w-full" style={{ paddingTop: 24, paddingBottom: 48 }}>
+          {/* Hero banner — 73% width, centered (≈13.4% side margins), rounded — like iranhotelonline.com */}
+          <div className="relative mx-auto w-[92%] md:w-[73%]">
+            <div className="relative w-full aspect-[16/9] md:aspect-[1390/298] rounded-3xl overflow-hidden">
+              <img
+                src={heroBg}
+                alt=""
+                style={{ width: '100%', height: '100%' }}
+                className="absolute inset-0 object-cover select-none pointer-events-none"
+              />
+            </div>
 
-          {/* Search card — 80% width, centered (≈10% equal side margins), floating over the hero */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, ease: [0.4, 0, 0.2, 1] }}
-            className="absolute left-1/2 -translate-x-1/2 top-[16%] sm:top-[30%] lg:top-[37%] w-[92%] sm:w-[84%] lg:w-[80%]"
-          >
-            <div
-              className="bg-white rounded-2xl shadow-soft-xl p-5 md:p-6"
+            {/* Search card — ~92% of banner width, centered, overlapping the banner's bottom edge */}
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, ease: [0.4, 0, 0.2, 1] }}
+              className="relative z-10 bg-white rounded-2xl shadow-soft-xl mx-auto w-[96%] md:w-[92%] p-5 md:p-6 -mt-16 md:-mt-7"
               style={{ border: `1px solid ${theme.colors.cardBorder}` }}
             >
               {/* Section tab (hotel) */}
@@ -128,8 +128,8 @@ export default function Home() {
                   <span>جستجو</span>
                 </button>
               </div>
-            </div>
-          </motion.div>
+            </motion.div>
+          </div>
         </div>
       </section>
 
