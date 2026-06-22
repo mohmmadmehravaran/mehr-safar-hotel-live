@@ -63,70 +63,72 @@ export default function Home() {
 
       {/* ── HERO ── */}
       <section className="relative" style={{ backgroundColor: theme.colors.bodyBg, isolation: 'isolate' }}>
-        <div className="relative mx-auto px-4 sm:px-6 lg:px-8" style={{ maxWidth: theme.sizes.maxContentWidth, paddingTop: theme.sizes.heroTopPadding + 20, paddingBottom: theme.sizes.heroBottomPadding }}>
-          <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, ease: [0.4, 0, 0.2, 1] }} className="max-w-5xl mx-auto">
+        {/* Full-bleed hero banner — same proportions as iranhotel.co (full width, 650px tall on desktop) */}
+        <div className="relative w-full h-[460px] sm:h-[560px] lg:h-[650px]">
+          <img
+            src={heroBg}
+            alt=""
+            style={{ width: '100%', height: '100%' }}
+            className="absolute inset-0 object-cover select-none pointer-events-none"
+          />
 
-            {/* Hero banner image */}
-            <div className="relative">
-              <img
-                src={heroBg}
-                alt=""
-                className="w-full h-40 sm:h-56 md:h-72 object-cover rounded-3xl select-none pointer-events-none"
-              />
+          {/* Search card — 80% width, centered (≈10% equal side margins), floating over the hero */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, ease: [0.4, 0, 0.2, 1] }}
+            className="absolute left-1/2 -translate-x-1/2 top-[16%] sm:top-[30%] lg:top-[37%] w-[92%] sm:w-[84%] lg:w-[80%]"
+          >
+            <div
+              className="bg-white rounded-2xl shadow-soft-xl p-5 md:p-6"
+              style={{ border: `1px solid ${theme.colors.cardBorder}` }}
+            >
+              {/* Section tab (hotel) */}
+              <div className="flex justify-start mb-4">
+                <span
+                  className="inline-flex items-center gap-1.5 pb-2 font-bold text-sm border-b-2"
+                  style={{ color: theme.colors.primary, borderColor: theme.colors.primary }}
+                >
+                  <Building2 className="w-4 h-4" />
+                  هتل
+                </span>
+              </div>
 
-              {/* Search box - clean white card overlapping the banner */}
-              <div
-                className="relative z-10 bg-white rounded-2xl shadow-soft-xl mx-auto p-5 md:p-6 w-[94%] -mt-10 md:-mt-16"
-                style={{ border: `1px solid ${theme.colors.cardBorder}` }}
-              >
-                {/* Section tab (hotel) */}
-                <div className="flex justify-start mb-4">
-                  <span
-                    className="inline-flex items-center gap-1.5 pb-2 font-bold text-sm border-b-2"
-                    style={{ color: theme.colors.primary, borderColor: theme.colors.primary }}
-                  >
-                    <Building2 className="w-4 h-4" />
-                    هتل
-                  </span>
-                </div>
-
-                <div className="flex flex-col md:flex-row gap-3">
-                  {/* City */}
-                  <div className="flex-1 relative">
-                    <CitySearchSelect
-                      value={searchInput}
-                      onChange={handleCityInputChange}
-                      onSelect={applyCity}
-                      placeholder="مقصد یا هتل"
-                    />
-                  </div>
-
-                  {/* Check-in / Check-out date range */}
-                  <DateRangeField
-                    checkIn={filters.checkIn}
-                    checkOut={filters.checkOut}
-                    onCheckInChange={handleCheckInChange}
-                    onCheckOutChange={handleCheckOutChange}
-                    minDate={todayISO}
-                    className="flex-[2]"
+              <div className="flex flex-col md:flex-row gap-3">
+                {/* City */}
+                <div className="flex-1 relative">
+                  <CitySearchSelect
+                    value={searchInput}
+                    onChange={handleCityInputChange}
+                    onSelect={applyCity}
+                    placeholder="مقصد یا هتل"
                   />
-
-                  {/* Search button */}
-                  <button
-                    type="button"
-                    onClick={handleSearch}
-                    className="flex items-center justify-center px-8 py-3.5 text-white font-bold text-base rounded-xl w-full md:w-auto"
-                    style={{
-                      backgroundColor: theme.colors.primary,
-                      boxShadow: `0 4px 16px ${theme.colors.primary}40`,
-                    }}
-                  >
-                    <span>جستجو</span>
-                  </button>
                 </div>
+
+                {/* Check-in / Check-out date range */}
+                <DateRangeField
+                  checkIn={filters.checkIn}
+                  checkOut={filters.checkOut}
+                  onCheckInChange={handleCheckInChange}
+                  onCheckOutChange={handleCheckOutChange}
+                  minDate={todayISO}
+                  className="flex-[2]"
+                />
+
+                {/* Search button */}
+                <button
+                  type="button"
+                  onClick={handleSearch}
+                  className="flex items-center justify-center px-8 py-3.5 text-white font-bold text-base rounded-xl w-full md:w-auto"
+                  style={{
+                    backgroundColor: theme.colors.primary,
+                    boxShadow: `0 4px 16px ${theme.colors.primary}40`,
+                  }}
+                >
+                  <span>جستجو</span>
+                </button>
               </div>
             </div>
-
           </motion.div>
         </div>
       </section>
