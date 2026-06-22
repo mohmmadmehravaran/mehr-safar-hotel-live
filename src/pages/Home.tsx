@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
-import { Search, Award, TrendingUp, Heart } from 'lucide-react';
+import { Search, Award, TrendingUp, Heart, Building2 } from 'lucide-react';
 import { useApp } from '../context/AppContext';
 import { useTheme } from '../context/ThemeContext';
 import HotelCard from '../components/HotelCard';
@@ -7,6 +7,8 @@ import CardSections from '../components/CardSections';
 import CitySearchSelect from '../components/CitySearchSelect';
 import FilterPanel from '../components/FilterPanel';
 import PersianRangeDatePicker from '../components/PersianRangeDatePicker';
+import PersianDatePicker from '../components/PersianDatePicker';
+import heroBg from '../assets/hero-bg.jpeg';
 import { motion } from 'framer-motion';
 import { getTodayJalali, gregorianToISO, jalaliToGregorian } from '../utils/date';
 import { useDocumentTitle } from '../utils/useDocumentTitle';
@@ -61,54 +63,81 @@ export default function Home() {
       {/* ── HERO ── */}
       <section className="relative" style={{ backgroundColor: theme.colors.bodyBg, isolation: 'isolate' }}>
         <div className="relative mx-auto px-4 sm:px-6 lg:px-8" style={{ maxWidth: theme.sizes.maxContentWidth, paddingTop: theme.sizes.heroTopPadding + 20, paddingBottom: theme.sizes.heroBottomPadding }}>
-          <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, ease: [0.4, 0, 0.2, 1] }} className="text-center max-w-4xl mx-auto">
+          <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, ease: [0.4, 0, 0.2, 1] }} className="max-w-5xl mx-auto">
 
-            {/* Search box - clean white card */}
-            <div
-              className="relative z-10 bg-white rounded-2xl shadow-soft-xl max-w-4xl mx-auto p-5 md:p-6"
-              style={{ border: `1px solid ${theme.colors.cardBorder}` }}
-            >
-              <div className="flex flex-col md:flex-row gap-3">
-                {/* City */}
-                <div className="flex-1 relative">
-                  <CitySearchSelect
-                    value={searchInput}
-                    onChange={handleCityInputChange}
-                    onSelect={applyCity}
-                    placeholder={theme.texts.searchPlaceholder}
-                  />
+            {/* Hero banner image */}
+            <div className="relative">
+              <img
+                src={heroBg}
+                alt=""
+                className="w-full h-40 sm:h-56 md:h-72 object-cover rounded-3xl select-none pointer-events-none"
+              />
+
+              {/* Search box - clean white card overlapping the banner */}
+              <div
+                className="relative z-10 bg-white rounded-2xl shadow-soft-xl mx-auto p-5 md:p-6 w-[94%] -mt-10 md:-mt-16"
+                style={{ border: `1px solid ${theme.colors.cardBorder}` }}
+              >
+                {/* Section tab (hotel) */}
+                <div className="flex justify-end mb-4">
+                  <span
+                    className="inline-flex items-center gap-1.5 pb-2 font-bold text-sm border-b-2"
+                    style={{ color: theme.colors.primary, borderColor: theme.colors.primary }}
+                  >
+                    <Building2 className="w-4 h-4" />
+                    هتل
+                  </span>
                 </div>
 
-                {/* Check-in / Check-out date range */}
-                <div className="flex-1">
-                  <PersianRangeDatePicker
-                    checkIn={filters.checkIn}
-                    checkOut={filters.checkOut}
-                    onCheckInChange={handleCheckInChange}
-                    onCheckOutChange={handleCheckOutChange}
-                    minDate={todayISO}
-                    className="w-full"
-                    placeholder="تاریخ ورود  ←  تاریخ خروج"
-                  />
-                </div>
+                <div className="flex flex-col md:flex-row gap-3">
+                  {/* City */}
+                  <div className="flex-1 relative">
+                    <CitySearchSelect
+                      value={searchInput}
+                      onChange={handleCityInputChange}
+                      onSelect={applyCity}
+                      placeholder="مقصد یا هتل"
+                    />
+                  </div>
 
-                {/* Search button */}
-                <button
-                  type="button"
-                  onClick={handleSearch}
-                  className="flex items-center justify-center gap-2 px-6 py-3.5 text-white font-bold text-base rounded-xl w-full md:w-auto"
-                  style={{
-                    background: `linear-gradient(135deg, ${theme.colors.primary}, ${theme.colors.secondary})`,
-                    boxShadow: `0 4px 16px ${theme.colors.primary}40`,
-                  }}
-                >
-                  <Search className="w-5 h-5" />
-                  <span>جستجو</span>
-                </button>
+                  {/* Check-in date */}
+                  <div className="flex-1">
+                    <PersianDatePicker
+                      value={filters.checkIn}
+                      onChange={handleCheckInChange}
+                      minDate={todayISO}
+                      className="w-full"
+                      placeholder="تاریخ ورود"
+                    />
+                  </div>
+
+                  {/* Check-out date */}
+                  <div className="flex-1">
+                    <PersianDatePicker
+                      value={filters.checkOut}
+                      onChange={handleCheckOutChange}
+                      minDate={filters.checkIn || todayISO}
+                      className="w-full"
+                      placeholder="تاریخ خروج"
+                    />
+                  </div>
+
+                  {/* Search button */}
+                  <button
+                    type="button"
+                    onClick={handleSearch}
+                    className="flex items-center justify-center px-8 py-3.5 text-white font-bold text-base rounded-xl w-full md:w-auto"
+                    style={{
+                      backgroundColor: theme.colors.primary,
+                      boxShadow: `0 4px 16px ${theme.colors.primary}40`,
+                    }}
+                  >
+                    <span>جستجو</span>
+                  </button>
+                </div>
               </div>
             </div>
 
-            
           </motion.div>
         </div>
       </section>
