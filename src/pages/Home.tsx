@@ -8,6 +8,7 @@ import CitySearchSelect from '../components/CitySearchSelect';
 import FilterPanel from '../components/FilterPanel';
 import PersianRangeDatePicker from '../components/PersianRangeDatePicker';
 import PersianDatePicker from '../components/PersianDatePicker';
+import DateRangeField from '../components/DateRangeField';
 import heroBg from '../assets/hero-bg.jpeg';
 import { motion } from 'framer-motion';
 import { getTodayJalali, gregorianToISO, jalaliToGregorian } from '../utils/date';
@@ -100,27 +101,15 @@ export default function Home() {
                     />
                   </div>
 
-                  {/* Check-in date */}
-                  <div className="flex-1">
-                    <PersianDatePicker
-                      value={filters.checkIn}
-                      onChange={handleCheckInChange}
-                      minDate={todayISO}
-                      className="w-full"
-                      placeholder="تاریخ ورود"
-                    />
-                  </div>
-
-                  {/* Check-out date */}
-                  <div className="flex-1">
-                    <PersianDatePicker
-                      value={filters.checkOut}
-                      onChange={handleCheckOutChange}
-                      minDate={filters.checkIn || todayISO}
-                      className="w-full"
-                      placeholder="تاریخ خروج"
-                    />
-                  </div>
+                  {/* Check-in / Check-out date range */}
+                  <DateRangeField
+                    checkIn={filters.checkIn}
+                    checkOut={filters.checkOut}
+                    onCheckInChange={handleCheckInChange}
+                    onCheckOutChange={handleCheckOutChange}
+                    minDate={todayISO}
+                    className="flex-[2]"
+                  />
 
                   {/* Search button */}
                   <button
